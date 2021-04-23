@@ -2,7 +2,6 @@ import "../styles/global.scss";
 import Header from "../components/Header";
 import Player from "../components/Player";
 import styles from "../styles/app.module.scss";
-import { PlayerProvider } from "../hooks/player";
 import AppProvider from "../hooks";
 
 function MyApp({ Component, pageProps }) {
