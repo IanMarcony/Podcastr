@@ -14,6 +14,7 @@ interface PlayerContextData {
   isPlaying: boolean;
   play(episode: Episode): void;
   togglePlay(): void;
+  setPlayingState(state: boolean): void;
 }
 
 const PlayerContext = createContext<PlayerContextData>({} as PlayerContextData);
@@ -33,9 +34,20 @@ const PlayerProvider: React.FC = ({ children }) => {
     setIsPlaying(!isPlaying);
   }, [isPlaying]);
 
+  const setPlayingState = useCallback((state: boolean) => {
+    setIsPlaying(state);
+  }, []);
+
   return (
     <PlayerContext.Provider
-      value={{ episodeList, currentEpisodeIndex, play, isPlaying, togglePlay }}
+      value={{
+        episodeList,
+        currentEpisodeIndex,
+        play,
+        isPlaying,
+        togglePlay,
+        setPlayingState,
+      }}
     >
       {children}
     </PlayerContext.Provider>
