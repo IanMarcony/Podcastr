@@ -7,12 +7,12 @@ import { ptBR } from "date-fns/locale";
 import { convertDurationToTimeString } from "../utils/convertDurationToTimeString";
 
 import styles from "./home.module.scss";
+import { usePlayer } from "../hooks/player";
 
 interface Episode {
   id: string;
   title: string;
   thumbnail: string;
-
   members: string;
   duration: number;
   durationAsString: string;
@@ -26,6 +26,8 @@ type HomeProps = {
 };
 
 export default function Home({ allEpisodes, latestEpisodes }: HomeProps) {
+  const { play } = usePlayer();
+
   return (
     <div className={styles.homepage}>
       <section className={styles.latestEpisodes}>
@@ -48,7 +50,7 @@ export default function Home({ allEpisodes, latestEpisodes }: HomeProps) {
                 <span>{episode.durationAsString}</span>
               </div>
 
-              <button type="button">
+              <button type="button" onClick={() => play(episode)}>
                 <img src="/play-green.svg" alt="Tocar" />
               </button>
             </li>
@@ -88,7 +90,7 @@ export default function Home({ allEpisodes, latestEpisodes }: HomeProps) {
                 <td>{episode.durationAsString}</td>
 
                 <td>
-                  <button type="button">
+                  <button type="button" onClick={() => play(episode)}>
                     <img src="/play-green.svg" alt="Tocar episódio" />{" "}
                   </button>
                 </td>
